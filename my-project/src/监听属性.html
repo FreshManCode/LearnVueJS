@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js 监听属性</title>
+  <style type="text/css">
+    table {
+      border: 1px solid black;
+    }
+
+    table {
+      width: 100%;
+    }
+
+    th {
+      height: 50px;
+    }
+
+    th, td {
+      border-bottom: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Vue.js 监听属性</h2>
+<p>
+  Vue.js监听属性watch,可以通过watch来响应数据的变化
+</p>
+<div id="app">
+  <p style="font-size: 25px;">计算器{{counter}}</p>
+  <button @click="counter++" style="font-size: 25px;">点我</button>
+  <hr>
+  <h2>千米与米之间的换算</h2>
+  <div>
+    千米:<input type="text" v-model="kilometers">
+    米:<input type="text" v-model='meters'>
+  </div>
+  <p id="info"></p>
+  <a href="图书购物车.html">监听属性的简单应用,图书购物车功能</a>
+  <hr>
+  <a style="color: red" href="样式绑定.html">Vue.js 样式绑定</a>
+</div>
+
+
+<script type="text/javascript">
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      counter: 1,
+      kilometers: 0,
+      meters: 0
+    },
+    methods: {},
+    computed: {},
+    watch: {
+      kilometers: function (val) {
+        this.kilometers = val;
+        this.meters = this.kilometers * 1000
+      },
+      meters: function (val) {
+        this.kilometers = val / 1000;
+        this.meters = val;
+      }
+    },
+
+  });
+  vm.$watch('counter', function (nval, oval) {
+    alert('计数值的变化 :' + oval + '变为' + nval + '!');
+  });
+  vm.$watch('kilometers', function (newValue, oldValue) {
+    //这个回调将在vm.kilometers改变后调用
+    document.getElementById('info').innerHTML = "修改前值为: " + oldValue + ",修改后置为: " + newValue
+  })
+
+</script>
+
+</body>
+</html>

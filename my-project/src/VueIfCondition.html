@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js条件与循环</title>
+   <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+</head>
+<body>
+
+<div id="app_if">
+  <h1>条件判断</h1>
+  <h3>使用v-if指令</h3>
+  <p v-if="seen">现在你可以看到</p>
+  <template v-if="ok">
+    <h1>菜鸟教程</h1>
+    <p>学的不仅是技术，更是梦想！</p>
+    <p>哈哈哈，打字辛苦啊！！！</p>
+  </template>
+
+  <h3>v-else</h3>
+  <p>可以用 v-else 指令给 v-if 添加一个 "else" 块：</p>
+  <p v-if="Math.random() > 0.5">
+    Sorry
+  </p>
+  <p v-else>
+    Not Sorry
+  </p>
+
+  <h2>循环语句</h2>
+  <p>循环使用 v-for 指令。<br>
+    v-for 指令需要以 site in sites 形式的特殊语法， sites 是源数据数组并且 site 是数组元素迭代的别名。<br>
+    v-for 可以绑定数据到数组来渲染一个列表：<br>
+  </p>
+  <a href="V_For.html">V_ForHTML</a>
+
+</div>
+
+<script>
+  new Vue({
+    el:"#app_if",
+    data:{
+      seen:true,
+      ok:true,
+    }
+  })
+
+
+</script>
+</body>
+</html>

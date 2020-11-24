@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+  <title>取消与全选事件</title>
+</head>
+<body>
+<div id="selected_all">
+  <button v-on:click="selecteAll" v-bind:disabled="selectedAll">全选</button>
+  <button v-on:click="cancelAll" v-bind:disabled="!selectedAll">取消</button>
+
+  <div v-for="item in books" :id="item.key">
+    <input type="checkbox" :id="item.key" :value="item.name" v-model="checkedNames">
+    <label :for=item.key>{{item.name}}</label>
+  </div>
+
+<!--  <br>-->
+<!--  <input type="checkbox" id="libai" value="李白" v-model="checkedNames">-->
+<!--  <label for="libai">李白</label>-->
+<!--  <br>-->
+
+<!--  <input type="checkbox" id="dufu" value="杜甫" v-model="checkedNames">-->
+<!--  <label for="dufu">杜甫</label>-->
+<!--  <br>-->
+
+<!--  <input type="checkbox" id="wangwei" value="王伟" v-model="checkedNames">-->
+<!--  <label for="wangwei">王伟</label>-->
+  <p>{{selectedAll?"全选了":"没有全选哦"}}</p>
+
+</div>
+
+<script type="text/javascript">
+  var vm = new Vue({
+    el: "#selected_all",
+    data: {
+      selectedAll: false,
+      books: [{'name': 'LL', "key": "LL_"}, {'name': 'WW', "key": "WW_"}, {'name': 'MM', "key": "MM_"}],
+      checkedNames: [],
+    },
+
+    methods: {
+      selecteAll: function () {
+        this.checkedNames = []
+        for (var i = 0; i < this.books.length; i++) {
+          this.checkedNames[i] = this.books[i].name
+        }
+        alert("checkedNames:"+this.checkedNames)
+      },
+      cancelAll: function () {
+        this.checkedNames = []
+      }
+    },
+    watch: {
+      checkedNames: function () {
+        //已经全选
+        if (this.checkedNames.length === this.books.length) {
+          this.selectedAll = true
+        } else {
+          this.selectedAll = false
+        }
+        alert(this.checkedNames)
+      }
+    },
+
+  });
+</script>
+
+</body>
+</html>

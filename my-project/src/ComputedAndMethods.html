@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <title>computed 与methods的区别:</title>
+</head>
+<body>
+<h3>示例展示 computed 与methods的区别:</h3>
+<div class="computed_t">
+  事例1,由于取的是缓存,所以只会运行一次,多次运行的结果是一样的
+  <ul>
+    <li v-for="(value,index) in my_tests">
+      'index is:{{index}}  value is:{{value}}  now is:{{now}}'
+    </li>
+  </ul>
+</div>
+
+<div class="methods_t">
+  事例2,由于使用的是methods函数,每次都会计算,所以得到的结果不同
+  <ul>
+    <li v-for="(value,index) in my_tests">
+      {{now()}}
+    </li>
+  </ul>
+</div>
+
+<script>
+  var coputedVue = new Vue({
+    el:".computed_t",
+    data:{
+      my_tests:[1,2,3,4]
+    },
+    computed: {
+      now:function () {
+        var count = 0;
+        for (var i = 0 ; i < 20000;i ++) {
+          for (var j = 0; j < 20000;j ++) {
+            count ++;
+          }
+        }
+        return Date.now()
+      },
+    },
+  });
+
+  var methodsValue = new Vue({
+    el:".methods_t",
+    data:{
+      my_tests:[1,2,3,4]
+    },
+    methods: {
+      now:function () {
+        var count = 0;
+        for (var i = 0 ; i < 1000;i ++) {
+          for (var j = 0; j < 1500;j ++) {
+            count ++;
+          }
+        }
+        return Date.now()
+      },
+    },
+  });
+
+  function nowDate() {
+    return Date.now()
+  }
+  function sleep(callback,time) {
+    setTimeout(callback,time)
+  }
+
+</script>
+
+</body>
+</html>

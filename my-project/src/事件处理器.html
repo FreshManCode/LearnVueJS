@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+  <title>Vue.js 事件处理器</title>
+</head>
+<body>
+<div id="eventhandle">
+  <a href="表单.html">表单页面</a>
+  <h3>1.事件监听可以使用 v-on 指令：</h3>
+  <button v-on:click="counter += 1">增加1</button>
+  <p>这个按钮被点击了{{counter}}次</p>
+  <p>
+    通常情况下，我们需要使用一个方法来调用 JavaScript 方法。
+    v-on 可以接收一个定义的方法来调用。
+  </p>
+  <button v-on:click="greet">Greet</button>
+  <hr>
+
+  <h3>2.除了直接绑定到一个方法，也可以用内联 JavaScript 语句：</h3>
+  <button v-on:click="say('hi')">Say Hi</button>
+  <button v-on:click="say('What')">Say what</button>
+
+  <h3>3.事件修饰符</h3>
+  <p>
+    Vue.js 为 v-on 提供了事件修饰符来处理 DOM 事件细节，如：event.preventDefault() 或 event.stopPropagation()。
+  </p>
+  <p>Vue.js 通过由点 . 表示的指令后缀来调用修饰符。</p>
+  <ul>.stop - 阻止冒泡</ul>
+  <ul>.prevent - 阻止默认事件</ul>
+  <ul>.capture - 阻止捕获</ul>
+  <ul>.self - 只监听触发该元素的事件</ul>
+  <ul>.once - 只触发一次</ul>
+  <ul>.left - 左键事件</ul>
+  <ul>.right - 右键事件</ul>
+  <ul>.middle - 中间滚轮事件</ul>
+  <hr>
+
+  <h3>4.按键修饰符</h3>
+  <p>Vue 允许为 v-on 在监听键盘事件时添加按键修饰符：</p>
+<!--只有在 keyCode 是 13 时调用 vm.submit(  -->
+  <input v-on:keyup.13 = 'submit'>
+  <input v-on:keyup.enter = 'submitEnter'>
+  <input id="" @keyup.enter = 'submitEnterSimple'>
+  <li>全部的按键别名:
+    <ol>.enter</ol>
+    <ol>.tab</ol>
+    <ol>.delete (捕获 "删除" 和 "退格" 键)</ol>
+    <ol>.esc</ol>
+    <ol>.space</ol>
+    <ol>.up</ol>
+    <ol>.down</ol>
+    <ol>.left</ol>
+    <ol>.right</ol>
+    <ol>.ctrl</ol>
+    <ol>.alt</ol>
+    <ol>.shift</ol>
+  </li>
+
+
+</div>
+
+<script type="text/javascript">
+  var vm = new Vue({
+    el:"#eventhandle",
+    data:{
+      counter:0,
+      name:"ZhangJunjun.JS"
+    },
+    methods:{
+      greet:function (event) {
+        alert('Hello'+this.name+"!")
+        if (event) {
+          alert(event.target.tagName)
+        }
+      },
+      say:function (message) {
+        alert(message)
+      },
+      submit:function () {
+        alert('submit keycode is:13')
+      },
+      submitEnter:function () {
+        alert('submitEnter')
+      },
+      submitEnterSimple:function (text) {
+        if (text) {
+          console.log(text)
+        }
+        alert('submitEnterSimple')
+      },
+    },
+  });
+//也可以直接用JavaScript方法直接调用
+// vm.greet(0)
+</script>
+
+</body>
+</html>

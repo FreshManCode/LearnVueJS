@@ -6,11 +6,18 @@
 </template>
 
 <script>
+// <!--导入组件-->
+import HelloWorld  from "./components/HelloWorld";
+
 export default {
-  name: 'App'
+  name: 'HelloWorld',
+  comments:{
+    HelloWorld
+  }
 }
 </script>
 
+<!--样式代码-->
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

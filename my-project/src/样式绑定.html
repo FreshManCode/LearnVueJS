@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js 样式绑定</title>
+  <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+  <style>
+    .base {
+      width: 200px;
+      height: 200px;
+    }
+    .active {
+      width: 100px;
+      height: 100px;
+      background: green;
+    }
+    .text-danger {
+      width: 100px;
+      height: 100px;
+      background: red;
+    }
+  </style>
+</head>
+<body>
+<div id ="StyleBind">
+  <h1>Vue.js 样式绑定</h1>
+
+  <p>
+    1:v-bind动态绑定指令，默认情况下标签自带属性的值是固定的，在为了能够动态的给这些属性添加值，可以使用v-bind:你要动态变化的值="表达式"
+  </p>
+  <p>
+    2:v-bind用于绑定属性和数据 ，其缩写为“ : ” 也就是v-bind:id === :id
+  </p>
+  <p>
+    3:v-model用在表单控件上的，用于实现双向数据绑定，所以如果你用在除了表单控件以外的标签是没有任何效果的。
+  </p>
+
+  <h3>1.Vue.js class</h3>
+  <p>class 与 style 是 HTML 元素的属性，用于设置元素的样式，我们可以用 v-bind 来设置样式属性。</p>
+  <p>Vue.js v-bind 在处理 class 和 style 时， 专门增强了它。表达式的结果类型除了字符串之外，还可以是对象或数组。</p>
+  <hr>
+
+  <h3>class 属性绑定</h3>
+  <p>我们可以为 v-bind:class 设置一个对象，从而动态的切换 class:</p>
+  <div v-bind:class="{'active':isActive}">
+  </div>
+
+  <hr>
+  <h3> 实例二</h3>
+  <p>我们也可以在对象中传入更多属性用来动态切换多个 class 。</p>
+  <p>text-danger 类背景颜色覆盖了 active 类的背景色：</p>
+  <div class="static" v-bind:class="{'active':isActive,'text-danger':hasError}"></div>
+  <hr>
+
+  <h3>实例 3 我们也可以直接绑定数据里的一个对象：</h3>
+  <p>text-danger 类背景颜色覆盖了 active 类的背景色：</p>
+  <div v-bind:class="classObject"></div>
+  <hr>
+
+  <h3>实例4 我们也可以在这里绑定返回对象的计算属性。这是一个常用且强大的模式：</h3>
+  <div v-bind:class="computeObjProperty"></div>
+  <hr>
+
+  <h3>数组语法</h3>
+  <div v-bind:class="[activeClass,errorClass]"></div>
+  <hr>
+
+  <h1>Vue.js style(内联样式)</h1>
+  <p>我们可以在 v-bind:style 直接设置样式：</p>
+  <div v-bind:style="{color:activeColor,fontSize:fontSize+'px'}">
+    菜鸟教程
+  </div>
+  <hr color="red" >
+
+  <h3>可以直接绑定到一个样式对象，让模板更清晰：</h3>
+  <div v-bind:style="styleObj">
+    样式绑定到对象上
+  </div>
+  <hr>
+
+  <h3>v-bind:style 可以使用数组将多个样式对象应用到一个元素上：</h3>
+  <div v-bind:style="[baseStyle,overridingStyles]">菜鸟教程</div>
+
+  <div>
+    <button v-on:click="fontSize --"> --</button>
+    {{fontSize}}
+    <button v-on:click="fontSize ++">++</button>
+  </div>
+
+  <button v-on:click="eventHandle">
+    去事件处理器HTML
+  </button>
+
+
+
+
+</div>
+<script type="text/javascript">
+  new Vue({
+    el:"#StyleBind",
+    data:{
+      isActive:true,
+      hasError:true,
+      classObject:{
+        isActive:true,
+        'text-danger':true,
+      },
+      error: {
+        value:true,
+        type:'fatal',
+      },
+      activeClass:'active',
+      errorClass:'text-danger',
+      activeColor: 'green',
+      fontSize: 30,
+      styleObj:{
+        color: 'green',
+        fontSize:'30px',
+      },
+
+      baseStyle:{
+        color: 'purple',
+        fontSize:'20px',
+      },
+      overridingStyles:{
+        'font-weight':'bold',
+      },
+
+    },
+    computed:{
+      computeObjProperty:function () {
+        return {
+          base:true,
+          active:this.isActive && !this.error.value,
+          'text-danger':this.error.value &&  this.error.type === 'fatal',
+        }
+
+      }
+    },
+    methods:{
+      eventHandle:function () {
+        window.location.href = '事件处理器.html'
+      }
+    }
+  })
+
+</script>
+
+
+</body>
+</html>

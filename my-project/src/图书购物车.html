@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>购物车功能</title>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <link type="text/css" href="../src/CSS/ZJMonitorProperty.css">
+  </head>
+<body>
+<div id="books">
+  <table style="border: 1px solid black">
+    <tr>
+      <th v-for="name in serials ">{{name}}</th>
+    </tr>
+    <tr  v-for="book in books">
+      <td style="border-bottom: 1px solid #ddd;" >{{book.id}}</td>
+      <td style="border-bottom: 1px solid #ddd;">{{book.name}}</td>
+      <td style="border-bottom: 1px solid #ddd;">{{book.price}}</td>
+      <td style="border-bottom: 1px solid #ddd;">
+        <button v-bind:disabled="book.count === 0"v-on:click="book.count -=1">
+        -
+      </button>
+        {{book.count}}
+        <button v-on:click="book.count +=1">+</button>
+      </td>
+      <td style="border-bottom: 1px solid #ddd;">
+        <button v-on:click="book.count = 0">移除</button>
+      </td>
+    </tr>
+  </table>
+  总价:{{totalPrice()}}
+
+</div>
+
+<script type="text/javascript">
+  var vm = new Vue({
+    el:"#books",
+    data:{
+      serials:['序列号','书名','价格','数量','操作'],
+      books:[{name:'平凡的世界',id:1,price:100.99,count:0},{name:'西游记',id:2,price:199.00,count:0}]
+    },
+    methods:{
+      totalPrice:function () {
+        var  totalPrice = 0;
+        for (var i = 0; i < this.books.length; i++) {
+          let book = this.books[i]
+          totalPrice += book.price * book.count
+        }
+        return totalPrice
+      }
+    },
+  });
+</script>
+</body>
+</html>

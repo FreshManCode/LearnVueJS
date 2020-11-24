@@ -22,6 +22,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 
   // these devServer options should be customized in /config/index.js
   devServer: {
+    inline:false,
     clientLogLevel: 'warning',
     historyApiFallback: {
       rewrites: [
@@ -42,8 +43,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
-    },
-    inline:false,
+    }
   },
   plugins: [
     new webpack.DefinePlugin({
