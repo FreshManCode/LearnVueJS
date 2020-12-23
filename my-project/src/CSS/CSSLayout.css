@@ -1,0 +1,262 @@
+
+.h {
+  color: red;
+  font-size: 30px;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  text-align: center;
+  alignment: center;
+}
+
+.h2 {
+  text-align: center;
+  alignment: center;
+}
+
+.mainDiv {
+  margin: 40px;
+  padding: 10px;
+  background-color: palegoldenrod;
+  /* margin 外边距
+  padding:内边距
+   */
+}
+
+.FourDiv {
+  width: 60%;
+  margin: 10px 20%;
+  padding: 15px;
+  background-color: lightpink;
+}
+
+.demo1 {
+  /*上-内边距*/
+  padding-top: 20px;
+  /*下内边距*/
+  padding-bottom: 20px;
+  text-align: center;
+  background-color: #f5f5f5;
+}
+
+.demo2 {
+  /*上下,左右 */
+  padding: 10px 10px;
+  text-align: left;
+  background-color: #f5f5f5;
+}
+
+.demo3 {
+  /*上,右,下*/
+  padding: 10px 10px 10px;
+  text-align: right;
+  background-color: #f5f5f5;
+}
+
+.demo {
+  /*!*水平显示*!*/
+  /*display: -webkit-flex;*/
+  /*!*水平居中*!*/
+  /*-webkit-align-items: center;*/
+  /*-webkit-align-content: center;*/
+  /*text-align: center;*/
+  /*水平居中*/
+  text-align: center;
+  verticle-align: center;
+}
+
+.vertical-center {
+  line-height: 20px;
+  text-align: center;
+}
+/*flex-wrap 是否允许子元素换行
+  默认值为nowrap，不换行，当父元素在主轴上一行（一列）装不下子元素时，将会对子元素进行等比缩放，使子元素能在主轴上一行（一列）显示。
+
+  当将属性值设置为wrap时，如子元素在一行（一列）上装不下，将会另起一行（一列）而不是改变子元素的大小
+*/
+/*正序换行排列*/
+.wrap {
+  display:flex;
+  flex-wrap: wrap;
+  color: black;
+}
+
+/*不换行排列*/
+.nowrap {
+  display:flex;
+  flex-wrap: nowrap;
+  color: white;
+}
+
+/*父容器*/
+.dad_center {
+  display: flex;
+  /*
+  flex-start：起始端对齐
+  flex-end：末尾段对齐
+  center：居中对齐
+  space-around：子容器沿主轴均匀分布，位于首尾两端的子容器到父容器的距离是子容器间距的一半。
+
+
+  */
+  justify-content: center;
+  align-items: center;
+}
+
+.dad_left {
+  display: flex;
+  /*
+  flex-start：起始端对齐
+  flex-end：末尾段对齐
+  center：居中对齐
+  space-around：子容器沿主轴均匀分布，位于首尾两端的子容器到父容器的距离是子容器间距的一半。
+  */
+  justify-content: flex-start;
+}
+
+.dad_around {
+  display: flex;
+  /*
+  设置子容器沿主轴排列：justify-content
+
+  flex-start：起始端对齐
+  flex-end：末尾段对齐
+  center：居中对齐
+  space-around：子容器沿主轴均匀分布，位于首尾两端的子容器到父容器的距离是子容器间距的一半。
+  space-between：子容器沿主轴均匀分布，位于首尾两端的子容器与父容器相切。
+
+  */
+  justify-content: space-around;
+}
+
+/*向右*/
+.dad_direction_row {
+  display: flex;
+  flex-direction: row;
+}
+
+/*向上*/
+.dad_direction_column {
+  display: flex;
+  flex-direction: column;
+}
+
+/*向下*/
+.dad_direction_column_reverse {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+/*向左*/
+.dad_direction_row_reverse {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.flex1 {
+  flex: 1;
+  background-color: #f5f5f5;
+  height: 40px;
+  border-radius: 5px;
+  margin: 5px;
+  text-align: center;
+  line-height:40px;
+}
+
+.flex2 {
+  flex: 2;
+  background-color: lightpink;
+  height: 40px;
+  border-radius: 5px;
+  margin: 5px;
+  text-align: center;
+  /*设置垂直居中*/
+  line-height:40px;
+}
+
+.flexFour {
+  width: 5rem;
+  background-color: #f5f5f5;
+  height: 40px;
+  border-radius: 5px;
+  margin: 5px;
+  text-align: center;
+  line-height:40px;
+}
+
+.flexEight {
+  width: 10rem;
+  background-color: lightpink;
+  height: 40px;
+  border-radius: 5px;
+  margin: 5px;
+  text-align: center;
+  /*设置垂直居中*/
+  line-height:40px;
+}
+
+
+
+/*
+设置子容器如何沿交叉轴排列：align-items
+align-items 属性用于定义如何沿着交叉轴方向分配子容器的间距。
+
+flex-start：起始端对齐
+flex-end：末尾段对齐
+baseline：基线对齐，这里的 baseline 默认是指首行文字，即 first baseline，所有子容器向基线对齐，
+交叉轴起点到元素基线距离最大的子容器将会与交叉轴起始端相切以确定基线。
+
+stretch：子容器沿交叉轴方向的尺寸拉伸至与父容器一致。
+*/
+
+
+/*
+1.2 子容器
+1.在主轴上如何伸缩：flex
+
+2.单独设置子容器如何沿交叉轴排列：align-self
+每个子容器也可以单独定义沿交叉轴排列的方式，此属性的可选值与父容器 align-items 属性完全一致，如果两者同时设置则以子容器的 align-self 属性为准。
+flex-start：起始端对齐
+flex-end：末尾段对齐
+ */
+
+/*2.轴
+轴 包括 主轴 和 交叉轴，我们知道 justify-content 属性决定子容器沿主轴的排列方式，
+align-items 属性决定子容器沿着交叉轴的排列方式。那么轴本身又是怎样确定的呢？
+在 flex 布局中，flex-direction 属性决定主轴的方向，交叉轴的方向由主轴确定。
+
+*主轴
+主轴的起始端由 flex-start 表示，末尾段由 flex-end 表示。不同的主轴方向对应的起始端、末尾段的位置也不相同。
+
+向右：flex-direction: row
+向下：flex-direction: column
+ */
+
+.son {
+  background-color: green;
+  border-radius: 5px;
+  width: 80px;
+  height: 80px;
+  text-align: center;
+  color: white;
+  margin: 10px;
+}
+
+.son1 {
+  background-color: blue;
+  border-radius: 5px;
+  width: 120px;
+  height: 80px;
+  text-align: center;
+  color: white;
+  margin: 10px;
+}
+
+.son2 {
+  background-color: orange;
+  border-radius: 5px;
+  width: 100px;
+  height: 80px;
+  text-align: center;
+  color: white;
+  margin: 10px;
+}
+

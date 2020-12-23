@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS布局学习</title>
+  <link rel="stylesheet" type="text/css" href="../CSS/CSSLayout.css">
+</head>
+<body>
+<div class="mainDiv">
+  <a href="FlexLayout.html">Flex进阶概念</a>
+  <h1 class='h'>CSS布局</h1>
+  <p class="demo1">demo_1</p>
+  <p class="demo2">demo_2</p>
+  <p class="demo3">demo_3</p>
+  <p class="demo">This a center Demo</p>
+  <hr>
+
+  <div>
+    <h2 class="h2">单行文本的居中</h2>
+    <p class="vertical-center">垂直居中</p>
+  </div>
+  <hr>
+  <div class="FourDiv">
+    <div class="nowrap">
+      <p>
+        nowrap不换行排序,nowrap不换行排序
+      </p>
+      <p>
+        nowrap不换行排序,nowrap不换行排序
+      </p>
+      <p>
+        nowrap不换行排序,nowrap不换行排序
+      </p>
+      <p>
+        nowrap不换行排序,nowrap不换行排序
+      </p>
+      <p>
+        nowrap不换行排序,nowrap不换行排序
+      </p>
+    </div>
+    <div class="wrap">
+      <p>
+        wrap正序换行换行排序,wrap正序换行行排序
+      </p>
+      <p>
+        wrap正序换行换行排序,wrap正序换行行排序
+      </p>
+      <p>
+        wrap正序换行换行排序,wrap正序换行行排序
+      </p>
+      <p>
+        wrap正序换行换行排序,wrap正序换行行排序
+      </p>
+      <p>
+        wrap正序换行换行排序,wrap正序换行行排序
+      </p>
+    </div>
+  </div>
+  <hr>
+  <h2 class="h2">实现垂直居中</h2>
+  <ul>
+    <h2 class="h2">1. 容器</h2>
+    <li>
+      容器具有这样的特点：父容器可以统一设置子容器的排列方式，子容器也可以单独设置自身的排列方式，如果两者同时设置，以子容器的设置为准。
+    </li>
+  </ul>
+  <div class="dad_center">
+    <span class="son">
+      <#son> <br>
+      80 x 80
+    </span>
+  </div>
+  <div class="dad_left">
+    <span class="son">
+      <#son> <br>
+      80 x 80
+    </span>
+
+    <span class="son1">
+      <#son> <br>
+      120 x 80
+    </span>
+
+    <span class="son2">
+      <#son> <br>
+      100 x 80
+    </span>
+  </div>
+  <div class="dad_around">
+    <span class="son">
+      <#son> <br>
+      80 x 80
+    </span>
+
+    <span class="son1">
+      <#son> <br>
+      120 x 80
+    </span>
+
+    <span class="son2">
+      <#son> <br>
+      100 x 80
+    </span>
+  </div>
+  <hr>
+  <div>
+    <h2 class="h2">向右：flex-direction: row</h2><br>
+    <div class="dad_direction_row">
+      <span class="flex1">flex:1 (flex-direction: row)</span>
+      <span class="flex2">flex:2 (flex-direction: row)</span>
+    </div>
+  </div>
+
+  <hr>
+  <div>
+    <h2 class="h2">向下：flex-direction: column</h2><br>
+    <div class="dad_direction_column">
+      <span class="flex1">flex:1 (flex-direction: row)</span>
+      <span class="flex2">flex:2 (flex-direction: row)</span>
+    </div>
+  </div>
+
+  <hr>
+  <div>
+    <h2 class="h2">向左：flex-direction: row-reverse</h2><br>
+    <div class="dad_direction_row_reverse">
+      <span class="flex1">flex:1 (flex-direction: row)</span>
+      <span class="flex2">flex:2 (flex-direction: row)</span>
+    </div>
+  </div>
+
+  <hr>
+  <div>
+    <h2 class="h2">向上：flex-direction: column-reverse</h2><br>
+    <div class="dad_direction_column_reverse">
+      <span class="flex1">flex:1 (flex-direction: row)</span>
+      <span class="flex2">flex:2 (flex-direction: row)</span>
+    </div>
+  </div>
+  <hr>
+  <div>
+    <h2 class="h2">flex 进阶概念</h2>
+    <p><strong>1. 父容器</strong> <br>
+      1.设置换行方式：flex-wrap <br>
+      决定子容器是否换行排列，不但可以顺序换行而且支持逆序换行。
+    </p>
+    <div class="nowrap">
+      <span class="flexFour">1</span>
+      <span class="flexEight">2</span>
+      <span class="flexFour">3</span>
+      <span class="flexEight">4</span>
+      <span class="flexFour">5</span>
+      <span class="flexEight">6</span>
+      <span class="flexFour">7</span>
+      <span class="flexEight">8</span>
+      <span class="flexFour">9</span>
+      <span class="flexEight">10</span>
+      <span class="flexFour">11</span>
+      <span class="flexEight">12</span>
+    </div>
+    <div class="wrap">
+      <span class="flexFour">1</span>
+      <span class="flexEight">2</span>
+      <span class="flexFour">3</span>
+      <span class="flexEight">4</span>
+      <span class="flexFour">5</span>
+      <span class="flexEight">6</span>
+      <span class="flexFour">7</span>
+      <span class="flexEight">8</span>
+      <span class="flexFour">9</span>
+      <span class="flexEight">10</span>
+      <span class="flexFour">11</span>
+      <span class="flexEight">12</span>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+</div>
+
+</body>
+</html>

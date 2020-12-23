@@ -1,0 +1,85 @@
+.SubContainerDiv {
+  background-color: #f5f5f5;
+}
+
+.DisplayFlex {
+  background-color: #f5f5f5;
+  display: flex;
+}
+
+/*
+flex-basis 表示在不伸缩的情况下子容器的原始尺寸
+主轴为横向时代表宽度 (row 行 主轴为行)
+*/
+.FlexDirectionRow {
+  display: flex;
+  flex-direction: row;
+}
+
+
+/*
+flex-basis 表示在不伸缩的情况下子容器的原始尺寸
+主轴为纵向时代表高度 (column 列 主轴为纵向)
+*/
+.FlexDirectionColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+/*
+flex-basis 表示在不伸缩的情况下子容器的原始尺寸。主轴为横向时代表宽度，主轴为纵向时代表高度。
+*/
+.FlexBasis120 {
+  flex-basis: 120px;
+  height: 80px;
+  background-color: #8ec16d;
+  border-radius: 8px;
+  text-align: center;
+  color: white;
+  font-size: 14px;
+  margin: auto;
+}
+
+/*设置扩展比例：flex-grow*/
+.FlexSon {
+  flex-basis: 120px;
+  background-color: #8ec16d;
+  border-radius: 8px;
+  text-align: center;
+  color: white;
+  font-size: 14px;
+  padding: 10px;
+}
+
+.FlexGrow1 {
+  flex-basis: 120px;
+  background-color: #8ec16d;
+  border-radius: 8px;
+  text-align: center;
+  color: white;
+  font-size: 14px;
+  flex-grow: 1;
+  padding: 10px;
+}
+
+.FlexGrow2 {
+  flex-basis: 120px;
+  background-color: #8ec16d;
+  border-radius: 8px;
+  text-align: center;
+  color: white;
+  font-size: 14px;
+  padding: 10px;
+  flex-grow: 2;
+}
+
+.CenterIMG {
+  text-align: center;
+}
+
+/*让子控件垂直居中*/
+.CenterIMG2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>子容器相关布局</title>
+  <link type="text/css" rel="stylesheet" href="../CSS/SubContainerLayout.css"></link>
+</head>
+<body>
+<div class="SubContainerDiv">
+  <h2 style="text-align: center">2. 子容器</h2>
+  <h4>设置基准大小：flex-basis.</h4>
+  <p>flex-basis 表示在不伸缩的情况下子容器的原始尺寸。主轴为横向时代表宽度，主轴为纵向时代表高度。</p>
+  <div class="FlexDirectionRow">
+    <span class="FlexBasis120">
+      <#son><br>
+     flex-basis:120px<br>
+      H: 80px
+    </span>
+  </div>
+  <br>
+  <div class="FlexDirectionColumn">
+    <span class="FlexBasis120">
+      <#son><br>
+     flex-basis:120px<br>
+      H: 80px
+    </span>
+  </div>
+
+  <h4 style="text-align: center">设置扩展比例：flex-grow</h4>
+  <p>未设置扩展比例：flex-grow</p>
+  <div class="DisplayFlex">
+    <span class="FlexSon">
+       <#son1><br>
+     flex-basis:<br>120px<br>
+    </span>
+    <span class="FlexSon" style="background-color: blue">
+       <#son2><br>
+     flex-basis:<br>120px<br>
+    </span>
+  </div>
+  <p>设置扩展比例：flex-grow</p>
+  <div class="DisplayFlex">
+    <span class="FlexGrow1">
+       <#son1><br>
+     flex-basis:<br>120px<br>
+    </span>
+    <span class="FlexGrow2" style="background-color: blue">
+       <#son2><br>
+     flex-basis:<br>120px<br>
+    </span>
+  </div>
+  <div class="CenterIMG">
+    <h3 style="text-align: center">以下就是 flex 布局的全部属性，一共 12 个，父容器、子容器各 6 个，可以随时通过下图进行回顾。</h3>
+    <img style="margin: 0 auto" id="SummaryIMG" src="">
+  </div>
+  <br>
+  <h3>以下也是图片垂直居中的实例</h3>
+  <div class="CenterIMG2">
+    <img id="SummaryIMG1" src="">
+  </div>
+</div>
+<script type="module">
+  import {loadSummaryIMG} from "../MyJS/DefaultData.js";
+
+  loadSummaryIMG()
+</script>
+
+</body>
+</html>

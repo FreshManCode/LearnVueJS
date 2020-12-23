@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js 路由</title>
+  <!--  <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>-->
+  <!-- Vue.js 路由JS -->
+  <!--  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>-->
+  <!--  <script src="https://unpkg.com/vue/dist/vue.js"></script>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/2.7.0/vue-router.min.js"></script>
+  <style>
+    ._active {
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+<div id="router">
+  <a href="过渡和动画.html">Vue.js过渡 & 动画</a>
+  <h2>Vue.js 路由</h2>
+  <p>
+    Vue.js 路由允许我们通过不同的 URL 访问不同的内容。
+  </p>
+  <p>Vue.js 路由需要载入<a style="color: blue" href="https://github.com/vuejs/vue-router">vue-router 库</a></p>
+  <p>中文文档地址<a href="https://router.vuejs.org/zh/">vue-router文档。</a>
+
+  <h3>简单实例</h3>
+  <p>Vue.js + vue-router 可以很简单的实现单页应用。</p>
+  <p>
+    router-link 是一个组件，该组件用于设置一个导航链接，切换不同 HTML 内容。 to 属性为目标地址， 即要显示的内容。<br>
+    以下实例中我们将 vue-router 加进来，然后配置组件和路由映射，再告诉 vue-router 在哪里渲染它们。代码如下所示：<br>
+    <i>
+      router-link 默认会被渲染成一个 <\a\> 标签
+    </i>
+  </p>
+  <hr>
+  <h2>Hello Vue Router!</h2>
+  <p>
+    <router-link to="/foo">Go to Foo</router-link>
+    <router-link to="/bar">Go to Bar</router-link>
+  </p>
+  <!-- 路由出口 -->
+  <!-- 路由匹配到的组件将渲染在这里 -->
+  <router-view></router-view>
+
+  <div>
+    <h3>
+      router-link 相关属性
+      <p>
+        <strong>to:</strong>
+        表示目标路由的链接。 当被点击后，内部会立刻把 to 的值传到 router.push()，所以这个值可以是一个字符串或者是描述目标位置的对象。
+      </p>
+    </h3>
+    <!-- 字符串   -->
+    <router-link to="home">Home</router-link>
+    <!--  渲染结果  -->
+    <a href="home">Home</a>
+    <!-- 使用 v-bind 的 JS 表达式 -->
+    <router-link v-bind:to="'home'">Home</router-link>
+
+    <!-- 不写 v-bind 也可以，就像绑定别的属性一样 -->
+    <router-link :to="'home'">Home</router-link>
+
+    <!-- 同上 -->
+    <router-link :to="{ path: 'home' }">Home</router-link>
+
+    <!-- 命名的路由 -->
+    <router-link :to="{ name: 'user', params: { userId: 123 }}">User</router-link>
+
+    <!-- 带查询参数，下面的结果为 /register?plan=private -->
+    <router-link :to="{ path: 'register', query: { plan: 'private' }}">Register</router-link>
+  </div>
+  <hr>
+  <p>
+    <strong>replace</strong>
+    设置 replace 属性的话，当点击时，会调用 router.replace() 而不是 router.push()，导航后不会留下 history 记录。
+    <router-link :to="{path:'relative/path'}" replace>replace</router-link>
+  </p>
+  <p>
+    <strong>append</strong>
+    设置 append 属性的话，当点击时，设置 append 属性后，则在当前 (相对) 路径前添加其路径。<br>
+    例如，我们从 /a 导航到一个相对路径 b，如果没有配置 append，则路径为 /b，如果配了，则为 /a/b
+    <router-link :to="{path:'relative/path'}" append>append</router-link>
+  </p>
+  <p>
+    <strong>tag</strong>
+    有时候想要 'router-link' 渲染成某种标签，例如 'li'。
+    于是我们使用 tag prop 类指定何种标签，同样它还是会监听点击，触发导航。
+    <router-link to="/foo" tag="li">foo</router-link>
+    <!-- 渲染结果 -->
+  <li>foo</li>
+  <hr>
+  <div>
+    <strong>active-class</strong><br>
+    设置 链接激活时使用的 CSS 类名。可以通过以下代码来替代。
+    <p>
+      <router-link v-bind:to="{path:'/router1'}" active-class="_active">Router Link 1</router-link>
+      <router-link v-bind:to="{path:'/router2'}" tag="span">Router Link 2</router-link>
+    </p>
+    <i>注意这里 class 使用 active-class="_active"。</i>
+  </div>
+  <hr>
+  <div>
+    <strong>exact-active-class</strong><br>
+    配置当链接被精确匹配的时候应该激活的 class。可以通过以下代码来替代。
+    <p>
+      <router-link v-bind:to="{path:'/router1'}" exact-active-class="_active">Router Link 1</router-link>
+      <router-link v-bind:to="{path:'/router2'}" tag="span">Router Link 2</router-link>
+    </p>
+  </div>
+  <hr>
+  <div>
+    <strong>event</strong><br>
+    声明可以用来触发导航的事件。可以是一个字符串或是一个包含字符串的数组。<br>
+    <router-link v-bind:to="{path:'/router1'}" event="mouseover">Router Link 1</router-link>
+    <i> 以上代码设置了 event 为 mouseover ，及在鼠标移动到 Router Link 1 上时导航的 HTML 内容会发生改变。</i>
+  </div>
+
+</div>
+
+<!--
+0. 如果使用模块化机制编程，导入 Vue 和 VueRouter，要调用 Vue.use(VueRouter)
+ -->
+<script type="text/javascript">
+  //1. 定义（路由）组件。 可以从其他文件 import 进来
+  const Foo = {template: '<div style="color: orangered">foo</div>'}
+  const Bar = {template: '<div>bar</div>'}
+
+  //2. 定义路由 每个路由应该映射一个组件。 其中"component" 可以是通过 Vue.extend() 创建的组件构造器，
+  //或者，只是一个组件配置对象。
+  const routers = [
+    {path: '/foo', component: Foo},
+    {path: '/bar', component: Bar}
+  ]
+
+  //3.创建router实例,然后传`routes` 配置,还可以传别的配置参数, 先从简单的配置起步。
+  const router = new VueRouter({
+    routes: routers //相当于routes:routes
+  })
+
+  //4.创建和挂在根实例
+  //记得要通过 router 配置参数注入路由，而让整个应用都有路由功能
+  const app = new Vue({
+    router
+  }).$mount('#router')
+
+</script>
+
+</body>
+</html>

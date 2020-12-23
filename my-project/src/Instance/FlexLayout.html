@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Flex 进阶概念</title>
+  <link type="text/css" rel="stylesheet" href="../CSS/FlexLayout.css"></link>
+</head>
+<body>
+<div class="FlexHigh">
+  <a href="SubContainerLayout.html">子容器相关布局</a>
+  <h2 style="text-align: center">flex 进阶概念</h2>
+  <p>*多行沿交叉轴对齐：align-content</p>
+  <p>当子容器多行排列时，设置行与行之间的对齐方式。
+  <p/>
+  <img id="JustifyContentImg" src="">
+
+  <div>
+    <h2 style="text-align: center">flex-start：起始端对齐</h2>
+    <div class="Flex_Start">
+      <span class="BlueSon">1</span>
+      <span class="GreenSon">2</span>
+      <span class="OrangeSon">3</span>
+      <span class="BlueSon">4</span>
+      <span class="GreenSon">5</span>
+      <span class="OrangeSon">6</span>
+      <span class="BlueSon">7</span>
+      <span class="GreenSon">8</span>
+      <span class="OrangeSon">9</span>
+      <span class="BlueSon">10</span>
+      <span class="GreenSon">11</span>
+      <span class="OrangeSon">12</span>
+    </div>
+    <hr>
+    <h2 style="text-align: center">flex-end：末尾段对齐</h2>
+    <div class="Flex_End">
+    <span class="BlueSon">1</span>
+    <span class="GreenSon">2</span>
+    <span class="OrangeSon">3</span>
+    <span class="BlueSon">4</span>
+    <span class="GreenSon">5</span>
+    <span class="OrangeSon">6</span>
+    <span class="BlueSon">7</span>
+    <span class="GreenSon">8</span>
+    <span class="OrangeSon">9</span>
+    <span class="BlueSon">10</span>
+    <span class="GreenSon">11</span>
+    <span class="OrangeSon">12</span>
+  </div>
+    <hr>
+    <h2 style="text-align: center">center：居中对齐</h2>
+    <div class="Flex_Center">
+      <span class="BlueSon">1</span>
+      <span class="GreenSon">2</span>
+      <span class="OrangeSon">3</span>
+      <span class="BlueSon">4</span>
+      <span class="GreenSon">5</span>
+      <span class="OrangeSon">6</span>
+      <span class="BlueSon">7</span>
+      <span class="GreenSon">8</span>
+      <span class="OrangeSon">9</span>
+      <span class="BlueSon">10</span>
+      <span class="GreenSon">11</span>
+      <span class="OrangeSon">12</span>
+    </div>
+
+    <hr>
+    <h2 style="text-align: center">space-around：等边距均匀分布</h2>
+    <div class="Flex_Space_Around">
+      <span class="BlueSon">1</span>
+      <span class="GreenSon">2</span>
+      <span class="OrangeSon">3</span>
+      <span class="BlueSon">4</span>
+      <span class="GreenSon">5</span>
+      <span class="OrangeSon">6</span>
+      <span class="BlueSon">7</span>
+      <span class="GreenSon">8</span>
+      <span class="OrangeSon">9</span>
+      <span class="BlueSon">10</span>
+      <span class="GreenSon">11</span>
+      <span class="OrangeSon">12</span>
+    </div>
+
+    <hr>
+    <h2 style="text-align: center">space-between：等间距均匀分布</h2>
+    <div class="Flex_Space_Between">
+      <span class="BlueSon">1</span>
+      <span class="GreenSon">2</span>
+      <span class="OrangeSon">3</span>
+      <span class="BlueSon">4</span>
+      <span class="GreenSon">5</span>
+      <span class="OrangeSon">6</span>
+      <span class="BlueSon">7</span>
+      <span class="GreenSon">8</span>
+      <span class="OrangeSon">9</span>
+      <span class="BlueSon">10</span>
+      <span class="GreenSon">11</span>
+      <span class="OrangeSon">12</span>
+    </div>
+
+    <hr>
+    <h2 style="text-align: center">stretch：拉伸对齐</h2>
+    <div class="Flex_Stretch">
+      <span class="BlueSon1">1</span>
+      <span class="GreenSon1">22</span>
+      <span class="OrangeSon1">3</span>
+      <span class="BlueSon1">433</span>
+      <span class="GreenSon1">5</span>
+      <span class="OrangeSon1">36</span>
+      <span class="BlueSon1">7</span>
+      <span class="GreenSon1">8</span>
+      <span class="OrangeSon1">9</span>
+      <span class="BlueSon1">1000</span>
+      <span class="GreenSon1">1331</span>
+      <span class="OrangeSon1">12</span>
+    </div>
+
+  </div>
+
+</div>
+<script type="module">
+  import {loadIMG} from '../MyJS/DefaultData.js'
+  loadIMG()
+</script>
+
+</body>
+
+
+</html>

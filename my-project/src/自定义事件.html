@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+  <title>自定义事件</title>
+</head>
+<body>
+<a href="自定义指令.html">Vue.js 自定义指令</a>
+<h1>
+  Vue.js 组件 - 自定义事件
+</h1>
+<p>
+  父组件是使用 props 传递数据给子组件，但如果子组件要把数据传递回去，就需要使用自定义事件！<br>
+  我们可以使用 v-on 绑定自定义事件, 每个 Vue 实例都实现了事件接口(Events interface)，即：
+</p>
+<ul>
+  1.使用 $on(eventName) 监听事件
+</ul>
+<ul>
+  2.使用 $emit(eventName) 触发事件
+</ul>
+<span>
+  另外，父组件可以在使用子组件的地方直接用 v-on 来监听子组件触发的事件。<br>
+  以下实例中子组件已经和它外部完全解耦了。它所做的只是触发一个父组件关心的内部事件。
+</span>
+<div id="custom_event">
+  <div id="counter_event_example">
+    <p>{{total}}</p>
+    <button_counter1 v-on:incremnt="incrementTotal2"></button_counter1>
+    <button_counter1 v-on:incremnt="incrementTotal2"></button_counter1>
+  </div>
+
+  <i>
+    data 必须是一个函数,不能是一个对象;<br>
+    这样的好处就是每个实例可以维护一份被返回对象的独立的拷贝，如果 data 是一个对象则会影响到其他实例;如下
+  </i>
+  <div>
+    <button_counter2></button_counter2>
+    <button_counter2></button_counter2>
+    <button_counter2></button_counter2>
+  </div>
+  <hr>
+
+  <h3>自定义组件的 v-model</h3>
+  <p>
+    组件上的 v-model 默认会利用名为 value 的 prop 和名为 input 的事件。
+  </p>
+  <input v-model="parentData">
+  <!--上面等价于下面  -->
+  <input :value="parentData"
+         @input="parentData=$event.target.value"
+  >
+  <p>
+    <strong style="color: red">1.</strong>
+    以下实例自定义组件 runoob-input，父组件的 num 的初始值是 100，更改子组件的值能实时更新父组件的 num：
+  </p>
+
+  <div>
+    <runoob-input v-model="num"></runoob-input>
+    <p>输入的数字为:{{num}}</p>
+  </div>
+  <p>
+    <strong style="color: red">2.</strong>
+    由于 v-model 默认传的是 value，不是 checked，所以对于对于复选框或者单选框的组件时，我们需要使用 model 选项，
+    model 选项可以指定当前的事件类型和传入的 props。
+  </p>
+  <div>
+    <base-checkbox v-model="lovingVue"></base-checkbox>
+    <div v-show="lovingVue">
+      如果选择框打钩我就会显示
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<script type="text/javascript">
+  var buttonCounter2Data = {
+    count: 0
+  }
+  Vue.component('button_counter1', {
+    template: '<button v-on:click="incrementHandler">{{counter}}</button>',
+    //data 必须是一个函数,不能是一个对象
+    data: function () {
+      return {
+        counter: 0,
+      }
+    },
+    methods: {
+      incrementHandler: function () {
+        this.counter += 1
+        this.$emit('incremnt')
+      }
+    },
+  });
+
+  Vue.component('runoob-input', {
+    //包含了名为 input 的事件
+    ////注意这template 后面使用的是" ` "号
+    template: `
+      <p>
+        <input
+          ref="input"
+          :value="value"
+          @input="$emit('input', $event.target.value)"
+        >
+      </p>
+    `,
+    props: ['value'], // 名为 value 的 prop
+  })
+
+  Vue.component('base-checkbox',{
+    model:{
+      props: 'checked',
+      event:  'change',//on change事件
+    },
+    props:{
+      checked:Boolean
+    },
+    //注意这template 后面使用的是" ` "号
+    template:`<input type="checkbox" v-bind:checked="checked" v-on:change="$emit('change',$event.target.checked)">`
+  })
+  //实例中 lovingVue 的值会传给 checked 的 prop，同时当 <base-checkbox> 触发 change 事件时， lovingVue 的值也会更新。
+
+
+  Vue.component('button_counter2', {
+    data: function () {
+      return {
+        count: 0,
+      }
+    },
+    data: function () {
+      return buttonCounter2Data
+    },
+    template: '<button v-on:click="count++">点击了{{count}}次.</button>'
+  });
+  var vm = new Vue({
+    el: "#custom_event",
+    data: {
+      total: 0,
+      parentData: "等价信息",
+      num: 100,
+      lovingVue:true,
+    },
+    methods: {
+      incrementTotal2: function () {
+        this.total += 1
+      }
+    },
+  });
+</script>
+</body>
+</html>

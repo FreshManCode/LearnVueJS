@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js Ajax(vue-resource)</title>
+  <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+  <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+</head>
+<body>
+<div id="async">
+  <h3>Vue 要实现异步加载需要使用到 vue-resource 库。</h3>
+  <p> 以下是一个简单的 Get 请求实例，请求地址是一个简单的 txt 文本：</p>
+  <input type="button" @click="get()" value="点我异步获取数据(get)">
+  <div v-if="asyncMessage.length > 0 ">
+    <h3>这是异步获取的数据</h3>
+    {{asyncMessage}}
+  </div>
+
+  <p>
+    如果需要传递数据，可以使用 this.$http.get('get.php',{params : jsonData}) 格式，第二个参数 jsonData 就是传到后端的数据。
+  </p>
+
+  <input type="button" @click="getWithParameter()" value="点我使用请求参数获取异步获取数据(get)">
+  <div v-if="asyncMessage2.length > 0 ">
+    <h3>这是携带参数异步获取的数据</h3>
+    {{asyncMessage2}}
+  </div>
+
+  <hr>
+  <div>
+    <h3>post 请求</h3>
+    <p>
+      post 发送数据到后端，需要第三个参数 {emulateJSON:true}。<br>
+      emulateJSON 的作用： 如果Web服务器无法处理编码为 application/json 的请求，你可以启用 emulateJSON 选项。<br>
+      emulateJSON:设置请求体的类型为application/x-www-form-urlencoded
+    </p>
+    <input type="button" @click="sendPostRequest()" value="发送Post请求试试">
+    <div v-if="asyncMessage3.length > 0">
+      <h3>这是使用post的异步请求</h3>
+      {{asyncMessage3}}
+    </div>
+  </div>
+
+  <div>
+    <h3>语法 & API</h3>
+    <p>你可以使用全局对象方式 Vue.http 或者在一个 Vue 实例的内部使用 this.$http来发起 HTTP 请求。</p><br>
+    请输入关键字<input type="text" v-model="keyword" @keyup="sendJsonP(keyword)">
+    <ul>
+      <li v-for="r in result">
+        {{r}}
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+<script type="text/javascript">
+  window.onload = function () {
+    var vm = new Vue({
+      el: "#async",
+      data: {
+        msg: 'Hello World!',
+        asyncMessage: "",
+        asyncMessage2: "",
+        asyncMessage3: "",
+        result: [],
+        keyword: "",
+      },
+      methods: {
+        get: function () {
+          //发送get请求
+          this.$http.get('https://www.runoob.com/try/ajax/ajax_info.txt').then(function (res) {
+            this.asyncMessage = res.body
+            // document.write(res.body)
+          }, function (e) {
+            console.log("请求失败处理", e)
+          });
+        },
+        getWithParameter: function () {
+          this.$http.get('https://www.runoob.com/try/ajax/ajax_info.txt', {params: {a: 1, b: 2}}).then(function (res) {
+            this.asyncMessage2 = res.body
+          }, function (res) {
+            console.log(res.status)
+          })
+        },
+        sendPostRequest: function () {
+          this.$http.post('https://www.runoob.com/try/ajax/demo_test_post.php',
+            {name: 'zhangjunjun', url: "http://www.runoob.com"}, {emulateJSON: true}).then(function (res) {
+            this.asyncMessage3 = res.body;
+          }, function (res) {
+            console.log(res.status)
+          })
+        },
+        sendJsonP: function (keyword) {
+          let url = 'https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web';
+          this.$http.jsonp(url,{
+            params: {
+              wd:keyword
+            },
+            //jsonp 默认是callback,百度缩写成了cb,
+            jsonp: 'cb'
+          }).then(res=>{
+            if (res.data.g){
+              this.result = res.data.g.map(x=>x['q']);
+            } else  {
+              this.result = []
+            }
+          });
+
+        },
+      },
+    });
+  }
+</script>
+
+</body>
+</html>

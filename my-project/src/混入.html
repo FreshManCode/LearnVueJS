@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js 混入</title>
+  <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+
+</head>
+<body>
+<div id="mix">
+  <a href="Vue.jsAjax(Axios).html">Vue.jsAjax(Axios) </a>
+  <h3>Vue.js 混入</h3>
+  <p>
+    混入 (mixins)定义了一部分可复用的方法或者计算属性。混入对象可以包含任意组件选项。<br>
+    当组件使用混入对象时，所有混入对象的选项将被混入该组件本身的选项。
+  </p>
+
+  <h3>选项合并</h3>
+  <p>
+    当组件和混入对象含有同名选项时，这些选项将以恰当的方式混合。<br>
+
+    比如，数据对象在内部会进行浅合并 (一层属性深度)，在和组件的数据发生冲突时以组件数据优先。<br>
+
+    以下实例中，Vue 实例与混入对象包含了相同的方法。从输出结果可以看出两个选项合并了。<br>
+
+  </p>
+
+</div>
+
+<script type="text/javascript">
+
+  var mixin = {
+    created: function () {
+      document.write('混入调用1' + '<br>')
+    }
+  }
+
+  var vm = new Vue({
+    el: "#mix",
+    data: {},
+    methods: {},
+  });
+  new Vue({
+    mixins:[mixin],
+    created:function () {
+      document.write('组件调用' + '<br>')
+    }
+  });
+
+  // 定义一个混入对象
+  var myMixin = {
+    created: function () {
+      this.startminx()
+    },
+    methods: {
+      startminx: function () {
+        document.write("这是混入实例")
+      }
+    },
+  };
+
+
+  var Component = Vue.extend({
+    mixins: [myMixin]
+  })
+  var component = new Component()
+
+
+</script>
+
+
+</body>
+</html>

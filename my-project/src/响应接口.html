@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js 响应接口</title>
+  <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+</head>
+<body>
+<div id="response">
+  <a href="Instance/实例.html">Vue.js实例</a>
+  <div>
+    <h1>Vue.js 响应接口</h1>
+    <p>
+      Vue 可以添加数据动态响应接口。<br>
+      例如以下实例，我们通过使用 $watch 属性来实现数据的监听，<strong>$watch 必须添加在 Vue 实例之外才能实现正确的响应。</strong> <br>
+      实例中通过点击按钮计数器会加 1。setTimeout 设置 2 秒后计算器的值加上 20 。<br>
+    </p>
+  </div>
+  <div>
+    <p style="font-size: 25pt;">计数器:{{counter}} </p>
+    <button @click="counter++" style="font-size: 25pt;">点我</button>
+  </div>
+  <ul>
+    <li>Vue 不允许在已经创建的实例上动态添加新的根级响应式属性。</li>
+    <li>Vue 不能检测到对象属性的添加或删除，最好的方式就是在初始化实例前声明根级响应式属性，哪怕只是一个空值。</li>
+    <li>如果我们需要在运行过程中实现属性的添加或删除，则可以使用全局 Vue，Vue.set 和 Vue.delete 方法。</li>
+  </ul>
+  <hr>
+
+  <div>
+    <h3>Vue.set</h3>
+    <p>Vue.set 方法用于设置对象的属性，它可以解决 Vue 无法检测添加属性的限制，语法格式如下：<br>
+    </p>
+    <ul>
+      Vue.set( target, key, value )
+      <li>
+        target: 可以是对象或数组
+      </li>
+      <li>
+        key : 可以是字符串或数字
+      </li>
+      <li>
+        value: 可以是任何类型
+      </li>
+    </ul>
+    <br>
+    <p style="font-size: 25pt;">计数器:{{products.id}}</p>
+    <button @click="products.id++" style="font-size: 25pt">点我</button>
+    <p>
+      在产品中添加了数量属性 qty，但是 get/set 方法只可用于 id，name 和 price 属性，却不能在 qty 属性中使用。<br>
+      我们不能通过添加 Vue 对象来实现响应。 Vue 主要在开始时创建所有属性。 如果我们要实现这个功能，可以通过 Vue.set 来实现：<br>
+      参照下面的myProduct实例添加属性的两个方法:
+    <p/>
+  </div>
+  <hr>
+  <div>
+    <h3>Vue.delete</h3>
+    <p>Vue.delete 用于删除动态添加的属性 语法格式：</p>
+    <ul>Vue.delete( target, key )
+      <li>
+        target: 可以是对象或数组
+      </li>
+      <li>
+        key : 可以是字符串或数字
+      </li>
+    </ul>
+    <button @click="VueDelete()">点我删除myProduct中的price属性</button>
+    <p>
+      该方法执行以后,myProduct中的price属性已经被删除,price 属性的 get/set 方法也已删除。
+    </p>
+  </div>
+
+
+</div>
+
+<script type="text/javascript">
+  var myProduct = {id: 1, name: 'book', price: '20.00'};
+  var vm = new Vue({
+    el: '#response',
+    data: {
+      counter: 1,
+      products: myProduct
+    },
+    methods: {
+      VueDelete: function () {
+        Vue.delete(myProduct, 'price');
+        console.log(vm)
+      },
+    },
+  });
+  //  使用 $watch 属性来实现数据的监听,$watch 必须添加在 Vue 实例之外才能实现正确的响应。
+  vm.$watch('counter', function (nval, oval) {
+    alert('计数器值得变化 :' + oval + '变为 ' + nval + '!');
+  });
+  setTimeout(
+    function () {
+      vm.counter += 2;
+    }, 2000
+  );
+  //给 myproduct 数组添加一个或多个属性，我们可以在 Vue 实例创建后使用以下代码：
+  vm.products.qty = '1';
+  console.log(vm);
+  console.log('VMVMVM');
+  // Vue 主要在开始时创建所有属性。 如果我们要实现这个功能，可以通过 Vue.set 来实现：
+  // 从控制台输出的结果可以看出 get/set 方法可用于qty 属性。
+  Vue.set(myProduct, 'newQty', 2);
+  console.log(vm);
+  vm.$watch('products.id', function (nval, oval) {
+    alert('计数器值的变化 :' + oval + ' 变为 ' + nval + '!');
+  });
+</script>
+
+</body>
+</html>

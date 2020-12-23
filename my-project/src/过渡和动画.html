@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js过渡 & 动画</title>
+  <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+
+  <!--可以设置不同的进入和离开动画 ,设置持续时间和动画函数 -->
+  <style>
+    .fade-center-active, .fade-leave-active {
+      transition: opacity 1.5s;
+    }
+
+    .fade-center, .fade-leave-to {
+      opacity: 0.1;
+    }
+
+    .slide-fade-enter-active {
+      transform: translateX(20px);
+      transition: all .2s ease;
+    }
+
+    .slide-fade-leave-active {
+      transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    }
+
+    .slide-fade-center, .slide-fade-leave-to {
+      transform: translateX(50px);
+      opacity: 0;
+    }
+
+  </style>
+
+</head>
+<body>
+<div id="animation">
+  <a href="混入.html">Vue.js 混入</a>
+  <h2>Vue.js 过渡 & 动画</h2>
+  <h3>过渡</h3>
+  <p>Vue 在插入、更新或者移除 DOM 时，提供多种不同方式的应用过渡效果。<br>
+    Vue 提供了内置的过渡封装组件，该组件用于包裹要实现过渡效果的组件。</p>
+  <h3>语法格式</h3>
+  <p>
+    <\transition name = "nameoftransition"><br>
+    <\div><\/div><br>
+    <\/transition>
+  </p>
+
+  <button v-on:click="show = !show">点我</button>
+  <transition name="fade">
+    <p v-show="show" v-bind:style="style_obj">动画实例</p>
+  </transition>
+  <hr>
+  <strong>过渡其实就是一个淡入淡出的效果。Vue在元素显示与隐藏的过渡中，提供了 6 个 class 来切换：</strong>
+  <ul>
+    *. v-enter：定义进入过渡的开始状态。在元素被插入之前生效，在元素被插入之后的下一帧移除。
+  </ul>
+  <ul>
+    *. v-enter-active：定义进入过渡生效时的状态。在整个进入过渡的阶段中应用，在元素被插入之前生效，在过渡/动画完成之后移除。<br>
+    这个类可以被用来定义进入过渡的过程时间，延迟和曲线函数。
+  </ul>
+  <ul>
+    *. v-leave: 定义离开过渡的开始状态。在离开过渡被触发时立刻生效，下一帧被移除。
+  </ul>
+  <ul>
+    *. v-leave-active：定义离开过渡生效时的状态。在整个离开过渡的阶段中应用，在离开过渡被触发时立刻生效，在过渡/动画完成之后移除。<br>
+    这个类可以被用来定义离开过渡的过程时间，延迟和曲线函数。
+  </ul>
+  <p>
+    对于这些在过渡中切换的类名来说，如果你使用一个没有名字的 transition，则 v- 是这些类名的默认前缀。<br>
+    如果你使用了 transition name="my-transition"，那么 v-enter 会替换为 my-transition-enter。<br>
+    v-enter-active 和 v-leave-active 可以控制进入/离开过渡的不同的缓和曲线
+  </p>
+  <hr>
+
+  <div>
+    <h3>CSS 过渡</h3>
+    <button v-on:click="show1 = !show1">点我</button>
+    <transition name="slide-fade">
+      <p v-if="show1">Hello</p>
+    </transition>
+  </div>
+  <hr>
+  <div>
+    <h3>自定义过渡的类名</h3>
+    <ul v-for="property in custom_propertis">
+      *. {{property}}
+    </ul>
+    <p>自定义过渡的类名优先级高于普通的类名，这样就能很好的与第三方（如：animate.css）的动画库结合使用。如下:</p>
+    <transition name="custom-classes-transition"
+                enter-active-class="animated tada"
+                leave-active-class="animated bounceOutRight">
+      <p v-if="show2">
+        菜鸟教程学习Vue.js!!!
+      </p>
+    </transition>
+    <button v-on:click="show2 = !show2">点我有特效哦</button>
+  </div>
+  <hr>
+  <di>
+    <h3>JavaScript 钩子</h3>
+    <p>可以在属性中声明 JavaScript 钩子:</p>
+    这些钩子函数可以结合 CSS transitions/animations 使用，也可以单独使用。<br>
+    当只用 JavaScript 过渡的时候，在 enter 和 leave 中必须使用 done 进行回调。否则，它们将被同步调用，过渡会立即完成。<br>
+    推荐对于仅使用 JavaScript 过渡的元素添加 v-bind:css="false"，Vue 会跳过 CSS 的检测。这也可以避免过渡过程中 CSS 的影响。<br>
+    一个使用 Velocity.js 的简单例子：<br>
+    <button v-on:click="show3 =!show3">点我看看效果</button>
+    <transition
+      v-on:before-enter="beforeEnter"
+      v-on:enter="enter"
+      v-on:leave="leave"
+      v-bind:css="false">
+      <p v-if="show3">JavaScript 钩子相关事例</p>
+
+    </transition>
+
+
+  </di>
+
+
+</div>
+
+<script type="text/javascript">
+  var vm = new Vue({
+    el: "#animation",
+    data: {
+      show: false,
+      show1: false,
+      show2: true,
+      show3: true,
+      style_obj: {
+        fontSize: '30px',
+        color: 'red',
+      },
+      custom_propertis: ["enter-class", "enter-active-class", "enter-to-class (2.1.8+)",
+        "leave-class", "leave-active-class", "leave-to-class (2.1.8+)"],
+    },
+    methods: {
+      beforeEnter: function (e) {
+        e.style.opacity = 0
+        e.style.transformOrigin = 'left'
+      },
+      enter:function (el,done) {
+        Velocity(el,{opacity:1,fontSize: '1.4rem'},{duration:300})
+        Velocity(el,{fontSize:'1rem'},{complete:done})
+      },
+      leave:function (el,done) {
+        Velocity(el,{translateX:'15px',rotateZ:'50deg'},{duration: 600})
+        Velocity(el,{rotateZ: '100deg'},{loop:2})
+        Velocity(el,{
+          rotateZ:'45deg',
+          translateX: '30px',
+          translateY: '30px',
+          opacity:0,
+        },{complete: done})
+      }
+
+    }
+  });
+
+</script>
+
+</body>
+</html>
